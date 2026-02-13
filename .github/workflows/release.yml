@@ -1,0 +1,22 @@
+name: Release
+
+on:
+  push:
+    tags: [ "v*" ]
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "8.0.x"
+      - name: Publish
+        run: dotnet publish ArtPrompter/ArtPrompter.csproj -c Release -p:PublishSingleFile=true -p:SelfContained=true -p:PublishTrimmed=false -p:PublishReadyToRun=true
+      - name: Zip
+        run: Compress-Archive -Path ArtPrompter/bin/Release/net8.0/win-x64/publish/* -DestinationPath ArtPrompter-win-x64.zip
+      - name: Upload Release Asset
+        uses: softprops/action-gh-release@v2
+        with:
+          files: ArtPrompter-win-x64.zip
