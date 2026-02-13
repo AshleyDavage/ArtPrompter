@@ -6,15 +6,58 @@
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="ArtPrompter.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
-        Icon="/Assets/avalonia-logo.ico"
-        Title="ArtPrompter">
+		Icon="/Assets/avalonia-logo.ico"
+        SystemDecorations="None"
+        ExtendClientAreaToDecorationsHint="True"
+        ExtendClientAreaTitleBarHeightHint="40"
+        Title="ArtPrompter"
+		TransparencyLevelHint="AcrylicBlur"
+		Background="Transparent"
+		Width="920"
+		Height="540">
+	
+    <Grid RowDefinitions="Auto,*">
+        <Border Grid.Row="0">
+            <Grid Height="40" ColumnDefinitions="*,Auto">
+                <Border Grid.Column="0" Background="Transparent" PointerPressed="OnTitleBarPointerPressed">
+                    <TextBlock Text="ArtPrompter" VerticalAlignment="Center" Margin="16,0" FontSize="14" />
+                </Border>
+                <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="8" Margin="0,0,12,0">
+                    <Button Content="-" Width="32" Height="28" Click="OnMinimizeClicked" />
+                    <Button Content="▢" Width="32" Height="28" Click="OnMaximizeClicked" />
+                    <Button Content="X" Width="32" Height="28" Click="OnCloseClicked" />
+                </StackPanel>
+            </Grid>
+        </Border>
 
-    <Design.DataContext>
-        <!-- This only sets the DataContext for the previewer in an IDE,
-             to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
-        <vm:MainWindowViewModel/>
-    </Design.DataContext>
+        <Grid Grid.Row="1">
+            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="20" Margin="32">
+                <Border Background="{DynamicResource SurfaceBrush}" CornerRadius="12" Padding="24" Width="520">
+                    <TextBlock Text="{Binding PromptText}" FontSize="28" TextAlignment="Center" TextWrapping="Wrap"
+                               HorizontalAlignment="Center" VerticalAlignment="Center" />
+                </Border>
 
-    <TextBlock Text="{Binding Greeting}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="12">
+                    <ComboBox Width="160" ItemsSource="{Binding Difficulties}" SelectedItem="{Binding SelectedDifficulty}" />
+                    <Button Content="Generate Prompt" Command="{Binding GeneratePromptCommand}" />
+                </StackPanel>
 
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="12">
+                    <Button Content="Add New Prompt" Command="{Binding AddNewPromptCommand}" />
+                    <Button Content="View Prompt Library" Command="{Binding OpenAffixLibraryCommand}" />
+                </StackPanel>
+            </StackPanel>
+
+            <Border Background="#80000000" IsVisible="{Binding IsPopupOpen}">
+                <Grid HorizontalAlignment="Center" VerticalAlignment="Center" Margin="24">
+                    <Border Background="{DynamicResource SurfaceBrush}" CornerRadius="12" Padding="24" Width="560">
+                        <StackPanel Spacing="16">
+                            <Button Content="Back" Command="{Binding ClosePopupCommand}" HorizontalAlignment="Left" />
+                            <ContentControl Content="{Binding ActivePopup}" />
+                        </StackPanel>
+                    </Border>
+                </Grid>
+            </Border>
+        </Grid>
+    </Grid>
 </Window>

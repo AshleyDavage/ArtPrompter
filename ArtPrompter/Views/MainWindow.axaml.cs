@@ -1,4 +1,5 @@
 using Avalonia.Controls;
+using Avalonia.Input;
 
 namespace ArtPrompter.Views
 {
@@ -7,6 +8,32 @@ namespace ArtPrompter.Views
         public MainWindow()
         {
             InitializeComponent();
+
+            ExtendClientAreaToDecorationsHint = true;
+            ExtendClientAreaChromeHints = Avalonia.Platform.ExtendClientAreaChromeHints.NoChrome;
+        }
+       
+        private void OnCloseClicked(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
+        {
+            Close();
+        }
+
+        private void OnMinimizeClicked(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
+        {
+            WindowState = WindowState.Minimized;
+        }
+
+        private void OnMaximizeClicked(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
+        {
+            WindowState = WindowState == WindowState.Maximized ? WindowState.Normal : WindowState.Maximized;
+        }
+
+        private void OnTitleBarPointerPressed(object? sender, PointerPressedEventArgs e)
+        {
+            if (e.GetCurrentPoint(this).Properties.IsLeftButtonPressed)
+            {
+                BeginMoveDrag(e);
+            }
         }
     }
 }

@@ -1,0 +1,34 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="using:ArtPrompter.ViewModels"
+             mc:Ignorable="d" d:DesignWidth="420" d:DesignHeight="320"
+             x:Class="ArtPrompter.Views.AddPromptView"
+             x:DataType="vm:AddPromptViewModel">
+    <StackPanel Spacing="16">
+        <TextBlock Text="Add new prompt" FontSize="20" />
+
+        <StackPanel Spacing="8">
+            <TextBlock Text="Prompt text" />
+            <TextBox Text="{Binding PromptText, UpdateSourceTrigger=PropertyChanged}" />
+        </StackPanel>
+
+        <StackPanel Spacing="8">
+            <TextBlock Text="Prompt type" />
+            <StackPanel Orientation="Horizontal" Spacing="12">
+                <RadioButton Content="Prefix" GroupName="PromptType"
+                             IsChecked="{Binding SelectedType, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=Prefix}" />
+                <RadioButton Content="Subject" GroupName="PromptType"
+                             IsChecked="{Binding SelectedType, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=Subject}" />
+                <RadioButton Content="Suffix" GroupName="PromptType"
+                             IsChecked="{Binding SelectedType, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=Suffix}" />
+            </StackPanel>
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Spacing="12">
+            <Button Content="Cancel" Command="{Binding CancelCommand}" />
+            <Button Content="Save" Command="{Binding SaveCommand}" IsDefault="True" />
+        </StackPanel>
+    </StackPanel>
+</UserControl>

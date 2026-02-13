@@ -1,0 +1,24 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="using:ArtPrompter.ViewModels"
+             mc:Ignorable="d" d:DesignWidth="640" d:DesignHeight="520"
+             x:Class="ArtPrompter.Views.AffixLibraryView"
+             x:DataType="vm:AffixLibraryViewModel">
+    <StackPanel Spacing="16">
+        <TextBlock Text="Prompt Attribute Library" FontSize="20" />
+
+        <TabControl>
+            <TabItem Header="Prefixes">
+                <ListBox ItemsSource="{Binding Prefixes}" />
+            </TabItem>
+            <TabItem Header="Subjects">
+                <ListBox ItemsSource="{Binding Subjects}" />
+            </TabItem>
+            <TabItem Header="Suffixes">
+                <ListBox ItemsSource="{Binding Suffixes}" />
+            </TabItem>
+        </TabControl>
+    </StackPanel>
+</UserControl>

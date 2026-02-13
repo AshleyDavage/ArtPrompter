@@ -1,3 +1,4 @@
+using ArtPrompter.Services;
 using ArtPrompter.ViewModels;
 using ArtPrompter.Views;
 using Avalonia;
@@ -23,10 +24,11 @@ namespace ArtPrompter
                 // Avoid duplicate validations from both Avalonia and the CommunityToolkit. 
                 // More info: https://docs.avaloniaui.net/docs/guides/development-guides/data-validation#manage-validationplugins
                 DisableAvaloniaDataAnnotationValidation();
-                desktop.MainWindow = new MainWindow
-                {
-                    DataContext = new MainWindowViewModel(),
-                };
+
+                var mainWindow = new MainWindow();
+                var promptDataService = new PromptDataService();
+                mainWindow.DataContext = new MainWindowViewModel(promptDataService);
+                desktop.MainWindow = mainWindow;
             }
 
             base.OnFrameworkInitializationCompleted();
