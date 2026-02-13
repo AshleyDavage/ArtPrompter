@@ -4,14 +4,13 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace ArtPrompter.ViewModels
 {
     public partial class MainWindowViewModel : ViewModelBase
     {
-        private readonly ArtPrompter.Services.PromptDataService _promptDataService;
+        private readonly PromptDataService _promptDataService;
         private readonly Random _random = new();
 
         private List<string> _prefixes = new();
@@ -20,21 +19,14 @@ namespace ArtPrompter.ViewModels
         private bool _isLoaded;
         private AddPromptViewModel? _activeAddPromptViewModel;
 
-        public MainWindowViewModel(ArtPrompter.Services.PromptDataService promptDataService)
+        public MainWindowViewModel(PromptDataService promptDataService)
         {
             _promptDataService = promptDataService;
-            Difficulties = Enum.GetValues<PromptDifficulty>();
-
             _ = LoadDataAsync();
         }
 
-        public IReadOnlyList<PromptDifficulty> Difficulties { get; }
-
         [ObservableProperty]
         private string _promptText = "";
-
-        [ObservableProperty]
-        private PromptDifficulty _selectedDifficulty = PromptDifficulty.Easy;
 
         [ObservableProperty]
         private ViewModelBase? _activePopup;
@@ -57,33 +49,8 @@ namespace ArtPrompter.ViewModels
             }
 
             var subject = GetRandomItem(_subjects) ?? "subject";
-            string? prefix = null;
-            string? suffix = null;
-
-            switch (SelectedDifficulty)
-            {
-                case PromptDifficulty.Medium:
-                    if (_random.Next(2) == 0)
-                    {
-                        prefix = GetRandomItem(_prefixes);
-                    }
-                    else
-                    {
-                        suffix = GetRandomItem(_suffixes);
-                    }
-
-                    if (prefix is null && suffix is null)
-                    {
-                        prefix = GetRandomItem(_prefixes);
-                        suffix = GetRandomItem(_suffixes);
-                    }
-
-                    break;
-                case PromptDifficulty.Hard:
-                    prefix = GetRandomItem(_prefixes);
-                    suffix = GetRandomItem(_suffixes);
-                    break;
-            }
+            var prefix = GetRandomItem(_prefixes);
+            var suffix = GetRandomItem(_suffixes);
 
             var parts = new List<string>();
             if (!string.IsNullOrWhiteSpace(prefix))
@@ -102,13 +69,12 @@ namespace ArtPrompter.ViewModels
         }
 
         [RelayCommand]
-        private Task AddNewPromptAsync()
+        private void AddNewPrompt()
         {
             var viewModel = new AddPromptViewModel();
             viewModel.CloseRequested += OnAddPromptCloseRequested;
             _activeAddPromptViewModel = viewModel;
             ShowPopup(viewModel);
-            return Task.CompletedTask;
         }
 
         [RelayCommand]
