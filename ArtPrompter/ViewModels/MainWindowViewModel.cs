@@ -26,7 +26,19 @@ namespace ArtPrompter.ViewModels
         }
 
         [ObservableProperty]
-        private string _promptText = "";
+        private string _currentPrefix = "";
+
+        [ObservableProperty]
+        private string _currentSubject = "";
+
+        [ObservableProperty]
+        private string _currentSuffix = "";
+
+        [ObservableProperty]
+        private bool _hasPrefix;
+
+        [ObservableProperty]
+        private bool _hasSuffix;
 
         [ObservableProperty]
         private ViewModelBase? _activePopup;
@@ -44,28 +56,57 @@ namespace ArtPrompter.ViewModels
 
             if (_subjects.Count == 0)
             {
-                PromptText = "No prompts available. Add a prompt to get started.";
+                CurrentPrefix = string.Empty;
+                CurrentSuffix = string.Empty;
+                CurrentSubject = "No prompts available. Add a prompt to get started.";
+                UpdatePromptText();
                 return;
             }
 
             var subject = GetRandomItem(_subjects) ?? "subject";
-            var prefix = GetRandomItem(_prefixes);
-            var suffix = GetRandomItem(_suffixes);
+            var prefix = GetRandomItem(_prefixes) ?? string.Empty;
+            var suffix = GetRandomItem(_suffixes) ?? string.Empty;
 
-            var parts = new List<string>();
-            if (!string.IsNullOrWhiteSpace(prefix))
+            CurrentPrefix = prefix;
+            CurrentSubject = subject;
+            CurrentSuffix = suffix;
+            UpdatePromptText();
+        }
+
+        [RelayCommand]
+        private void RerollPrefix()
+        {
+            if (_prefixes.Count == 0)
             {
-                parts.Add(prefix);
+                return;
             }
 
-            parts.Add(subject);
+            CurrentPrefix = GetRandomItem(_prefixes) ?? string.Empty;
+            UpdatePromptText();
+        }
 
-            if (!string.IsNullOrWhiteSpace(suffix))
+        [RelayCommand]
+        private void RerollSubject()
+        {
+            if (_subjects.Count == 0)
             {
-                parts.Add(suffix);
+                return;
             }
 
-            PromptText = string.Join(' ', parts);
+            CurrentSubject = GetRandomItem(_subjects) ?? "subject";
+            UpdatePromptText();
+        }
+
+        [RelayCommand]
+        private void RerollSuffix()
+        {
+            if (_suffixes.Count == 0)
+            {
+                return;
+            }
+
+            CurrentSuffix = GetRandomItem(_suffixes) ?? string.Empty;
+            UpdatePromptText();
         }
 
         [RelayCommand]
@@ -159,6 +200,12 @@ namespace ArtPrompter.ViewModels
 
             ActivePopup = null;
             IsPopupOpen = false;
+        }
+
+        private void UpdatePromptText()
+        {
+            HasPrefix = !string.IsNullOrWhiteSpace(CurrentPrefix);
+            HasSuffix = !string.IsNullOrWhiteSpace(CurrentSuffix);
         }
     }
 }

@@ -1,8 +1,9 @@
 using ArtPrompter.Models;
 using ArtPrompter.Services;
+using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
-using System.Windows.Input;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace ArtPrompter.ViewModels
 {
@@ -25,6 +26,24 @@ namespace ArtPrompter.ViewModels
 
         public ICommand CloseCommand { get; }
 
+        [RelayCommand]
+        private async Task RemovePrefixAsync(string? value)
+        {
+            await RemoveItemAsync(PromptType.Prefix, Prefixes, value);
+        }
+
+        [RelayCommand]
+        private async Task RemoveSubjectAsync(string? value)
+        {
+            await RemoveItemAsync(PromptType.Subject, Subjects, value);
+        }
+
+        [RelayCommand]
+        private async Task RemoveSuffixAsync(string? value)
+        {
+            await RemoveItemAsync(PromptType.Suffix, Suffixes, value);
+        }
+
         private async Task LoadAsync()
         {
             var prefixes = await _promptDataService.LoadAsync(PromptType.Prefix);
@@ -43,6 +62,17 @@ namespace ArtPrompter.ViewModels
             {
                 target.Add(item);
             }
+        }
+
+        private async Task RemoveItemAsync(PromptType type, ObservableCollection<string> target, string? value)
+        {
+            if (string.IsNullOrWhiteSpace(value))
+            {
+                return;
+            }
+
+            await _promptDataService.RemovePromptAsync(type, value);
+            target.Remove(value);
         }
     }
 }

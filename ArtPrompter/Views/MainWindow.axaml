@@ -32,8 +32,13 @@
         <Grid Grid.Row="1">
             <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="20" Margin="32">
                 <Border Background="{DynamicResource SurfaceBrush}" CornerRadius="12" Padding="24" Width="800">
-                    <TextBlock Text="{Binding PromptText}" FontSize="28" TextAlignment="Center" TextWrapping="Wrap"
-                               HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    <WrapPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <Button Classes="PromptPart" Content="{Binding CurrentPrefix}" Command="{Binding RerollPrefixCommand}"
+                                IsVisible="{Binding HasPrefix}" Margin="3,0" />
+                        <Button Classes="PromptPart" Content="{Binding CurrentSubject}" Command="{Binding RerollSubjectCommand}" Margin="3,0" />
+                        <Button Classes="PromptPart" Content="{Binding CurrentSuffix}" Command="{Binding RerollSuffixCommand}"
+                                IsVisible="{Binding HasSuffix}" Margin="3,0" />
+                    </WrapPanel>
                 </Border>
 
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="12">

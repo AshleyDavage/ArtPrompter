@@ -17,11 +17,19 @@
         <Color x:Key="PrimaryColor">#9ED6D6</Color>
         <Color x:Key="PrimaryHoverColor">#B7E3E3</Color>
         <Color x:Key="TextColor">#F2F2F2</Color>
+        <Color x:Key="PromptLibraryPanelColor">#262626</Color>
         <SolidColorBrush x:Key="AppBackgroundBrush" Color="{DynamicResource AppBackgroundColor}" />
         <SolidColorBrush x:Key="SurfaceBrush" Color="{DynamicResource SurfaceColor}" />
         <SolidColorBrush x:Key="PrimaryBrush" Color="{DynamicResource PrimaryColor}" />
         <SolidColorBrush x:Key="PrimaryHoverBrush" Color="{DynamicResource PrimaryHoverColor}" />
         <SolidColorBrush x:Key="TextBrush" Color="{DynamicResource TextColor}" />
+        <SolidColorBrush x:Key="PromptLibraryPanelBrush" Color="{DynamicResource PromptLibraryPanelColor}" />
+        <SolidColorBrush x:Key="ListBoxItemSelectedBackground" Color="{DynamicResource PromptLibraryPanelColor}" />
+        <Color x:Key="SystemAccentColor">#9ED6D6</Color>
+        <Color x:Key="SystemAccentColorLight1">#B7E3E3</Color>
+        <Color x:Key="SystemAccentColorDark1">#7FCACA</Color>
+        <SolidColorBrush x:Key="SystemAccentColorBrush" Color="{DynamicResource SystemAccentColor}" />
+        <SolidColorBrush x:Key="SystemControlHighlightLowBrush" Color="{DynamicResource PromptLibraryPanelColor}" />
     </Application.Resources>
   
     <Application.Styles>
@@ -40,8 +48,16 @@
             <Setter Property="CornerRadius" Value="8" />
             <Setter Property="Padding" Value="16,8" />
         </Style>
-        <Style Selector="Button:pointerover">
-            <Setter Property="Background" Value="{DynamicResource PrimaryHoverBrush}" />
+        <Style Selector="Button.PromptPart">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderBrush" Value="Transparent" />
+            <Setter Property="Foreground" Value="{DynamicResource TextBrush}" />
+            <Setter Property="FontSize" Value="28" />
+            <Setter Property="Padding" Value="4,0" />
+            <Setter Property="Cursor" Value="Hand" />
+        </Style>
+        <Style Selector="Button.PromptPart:pointerover">
+            <Setter Property="Background" Value="#33FFFFFF" />
         </Style>
         <Style Selector="TextBox">
             <Setter Property="Background" Value="{DynamicResource SurfaceBrush}" />
@@ -55,22 +71,47 @@
             <Setter Property="BorderBrush" Value="{DynamicResource PrimaryBrush}" />
             <Setter Property="CornerRadius" Value="6" />
         </Style>
-        <Style Selector="TabControl">
+        <Style Selector="TabControl.PromptLibraryTabs TabStrip">
             <Setter Property="Background" Value="{DynamicResource SurfaceBrush}" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="BorderBrush" Value="Transparent" />
         </Style>
-        <Style Selector="TabItem">
+        <Style Selector="TabControl.PromptLibraryTabs TabItem">
             <Setter Property="Background" Value="{DynamicResource SurfaceBrush}" />
             <Setter Property="Foreground" Value="{DynamicResource TextBrush}" />
             <Setter Property="Padding" Value="12,6" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="BorderBrush" Value="{DynamicResource TextBrush}" />
+            <Setter Property="Template">
+                <ControlTemplate TargetType="TabItem">
+                    <Border Background="{TemplateBinding Background}" CornerRadius="0" Padding="{TemplateBinding Padding}"
+                            BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}">
+                        <TextBlock Text="{TemplateBinding Header}" Foreground="{TemplateBinding Foreground}"
+                                   HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    </Border>
+                </ControlTemplate>
+            </Setter>
         </Style>
-        <Style Selector="TabItem:selected">
-            <Setter Property="Background" Value="{DynamicResource PrimaryBrush}" />
-            <Setter Property="Foreground" Value="#1C1C1C" />
+        <Style Selector="TabControl.PromptLibraryTabs TabItem:pointerover">
+            <Setter Property="Background" Value="{DynamicResource PrimaryHoverBrush}" />
+            <Setter Property="Foreground" Value="#141414" />
+        </Style>
+        <Style Selector="TabControl.PromptLibraryTabs TabItem:selected">
+            <Setter Property="Background" Value="{DynamicResource PromptLibraryPanelBrush}" />
+            <Setter Property="Foreground" Value="{DynamicResource TextBrush}" />
+            <Setter Property="BorderThickness" Value="0,0,0,2" />
+            <Setter Property="BorderBrush" Value="{DynamicResource PrimaryBrush}" />
         </Style>
         <Style Selector="ListBox">
             <Setter Property="Background" Value="{DynamicResource SurfaceBrush}" />
             <Setter Property="Foreground" Value="{DynamicResource TextBrush}" />
             <Setter Property="BorderBrush" Value="{DynamicResource AppBackgroundBrush}" />
+        </Style>
+        <Style Selector="ListBox.PromptLibraryList ListBoxItem:selected">
+            <Setter Property="Background" Value="{DynamicResource PromptLibraryPanelBrush}" />
+            <Setter Property="Foreground" Value="{DynamicResource TextBrush}" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="BorderBrush" Value="Transparent" />
         </Style>
     </Application.Styles>
 </Application>

@@ -7,20 +7,68 @@
              x:Class="ArtPrompter.Views.AffixLibraryView"
              x:DataType="vm:AffixLibraryViewModel">
     <Grid RowDefinitions="Auto,*,Auto" RowSpacing="16">
+        <Grid.Styles>
+            <Style Selector="Button.DeleteButton">
+                <Setter Property="Background" Value="Transparent" />
+                <Setter Property="Padding" Value="6,2" />
+            </Style>
+            <Style Selector="ListBoxItem:pointerover Button.DeleteButton">
+                <Setter Property="Opacity" Value="1" />
+            </Style>
+        </Grid.Styles>
         <TextBlock Text="Prompt Attribute Library" FontSize="20" />
 
-        <TabControl Grid.Row="1">
+        <TabControl Grid.Row="1" Margin="0,6,0,0" HorizontalAlignment="Center" Width="500" Classes="PromptLibraryTabs">
             <TabItem Header="Prefixes">
-                <ListBox ItemsSource="{Binding Prefixes}" MaxHeight="280"
-                         ScrollViewer.VerticalScrollBarVisibility="Auto" />
+                <Border Padding="6">
+                    <ListBox CornerRadius="8" Background="{DynamicResource PromptLibraryPanelBrush}" ItemsSource="{Binding Prefixes}" MaxHeight="280" Width="500" Classes="PromptLibraryList"
+                             ScrollViewer.VerticalScrollBarVisibility="Auto">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate x:DataType="x:String">
+                                <Grid ColumnDefinitions="*,Auto" Margin="6,2">
+                                    <TextBlock Text="{Binding}" VerticalAlignment="Center" />
+                                    <Button Classes="DeleteButton" Grid.Column="1" Content="🗑"
+                                            Command="{Binding $parent[UserControl].DataContext.RemovePrefixCommand}"
+                                            CommandParameter="{Binding}" />
+                                </Grid>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </Border>
             </TabItem>
             <TabItem Header="Subjects">
-                <ListBox ItemsSource="{Binding Subjects}" MaxHeight="280"
-                         ScrollViewer.VerticalScrollBarVisibility="Auto" />
+                <Border Padding="6">
+                    <ListBox CornerRadius="8" Background="{DynamicResource PromptLibraryPanelBrush}" ItemsSource="{Binding Subjects}" MaxHeight="280" Width="500" Classes="PromptLibraryList"
+                             ScrollViewer.VerticalScrollBarVisibility="Auto">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate x:DataType="x:String">
+                                <Grid ColumnDefinitions="*,Auto" Margin="6,2">
+                                    <TextBlock Text="{Binding}" VerticalAlignment="Center" />
+                                    <Button Classes="DeleteButton" Grid.Column="1" Content="🗑"
+                                            Command="{Binding $parent[UserControl].DataContext.RemoveSubjectCommand}"
+                                            CommandParameter="{Binding}" />
+                                </Grid>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </Border>
             </TabItem>
             <TabItem Header="Suffixes">
-                <ListBox ItemsSource="{Binding Suffixes}" MaxHeight="280"
-                         ScrollViewer.VerticalScrollBarVisibility="Auto" />
+                <Border Padding="6">
+                    <ListBox CornerRadius="8" Background="{DynamicResource PromptLibraryPanelBrush}" ItemsSource="{Binding Suffixes}" MaxHeight="280" Width="500" Classes="PromptLibraryList"
+                             ScrollViewer.VerticalScrollBarVisibility="Auto">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate x:DataType="x:String">
+                                <Grid ColumnDefinitions="*,Auto" Margin="6,2">
+                                    <TextBlock Text="{Binding}" VerticalAlignment="Center" />
+                                    <Button Classes="DeleteButton" Grid.Column="1" Content="🗑"
+                                            Command="{Binding $parent[UserControl].DataContext.RemoveSuffixCommand}"
+                                            CommandParameter="{Binding}" />
+                                </Grid>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </Border>
             </TabItem>
         </TabControl>
 

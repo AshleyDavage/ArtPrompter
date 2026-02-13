@@ -42,6 +42,13 @@ namespace ArtPrompter.Services
             await SaveAsync(type, items);
         }
 
+        public async Task RemovePromptAsync(PromptType type, string text)
+        {
+            var items = await LoadAsync(type);
+            items.RemoveAll(item => string.Equals(item, text, StringComparison.OrdinalIgnoreCase));
+            await SaveAsync(type, items);
+        }
+
         public async Task SaveAsync(PromptType type, List<string> items)
         {
             var path = GetFilePath(type);
