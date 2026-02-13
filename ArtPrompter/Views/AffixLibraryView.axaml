@@ -11,13 +11,16 @@
 
         <TabControl>
             <TabItem Header="Prefixes">
-                <ListBox ItemsSource="{Binding Prefixes}" />
+                <ListBox ItemsSource="{Binding Prefixes}" MaxHeight="280"
+                         ScrollViewer.VerticalScrollBarVisibility="Auto" />
             </TabItem>
             <TabItem Header="Subjects">
-                <ListBox ItemsSource="{Binding Subjects}" />
+                <ListBox ItemsSource="{Binding Subjects}" MaxHeight="280"
+                         ScrollViewer.VerticalScrollBarVisibility="Auto" />
             </TabItem>
             <TabItem Header="Suffixes">
-                <ListBox ItemsSource="{Binding Suffixes}" />
+                <ListBox ItemsSource="{Binding Suffixes}" MaxHeight="280"
+                         ScrollViewer.VerticalScrollBarVisibility="Auto" />
             </TabItem>
         </TabControl>
     </StackPanel>

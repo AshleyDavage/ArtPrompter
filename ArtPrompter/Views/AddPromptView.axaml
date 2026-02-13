@@ -7,7 +7,7 @@
              x:Class="ArtPrompter.Views.AddPromptView"
              x:DataType="vm:AddPromptViewModel">
     <StackPanel Spacing="16">
-        <TextBlock Text="Add new prompt" FontSize="20" />
+        <TextBlock Text="Add prompt" FontSize="20" />
 
         <StackPanel Spacing="8">
             <TextBlock Text="Prompt text" />

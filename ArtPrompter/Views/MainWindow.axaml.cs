@@ -35,5 +35,19 @@ namespace ArtPrompter.Views
                 BeginMoveDrag(e);
             }
         }
+
+        private void OnOverlayPointerPressed(object? sender, PointerPressedEventArgs e)
+        {
+            if (DataContext is ArtPrompter.ViewModels.MainWindowViewModel viewModel
+                && viewModel.ClosePopupCommand.CanExecute(null))
+            {
+                viewModel.ClosePopupCommand.Execute(null);
+            }
+        }
+
+        private void OnModalPointerPressed(object? sender, PointerPressedEventArgs e)
+        {
+            e.Handled = true;
+        }
     }
 }
