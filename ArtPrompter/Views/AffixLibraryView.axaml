@@ -6,10 +6,10 @@
              mc:Ignorable="d" d:DesignWidth="640" d:DesignHeight="520"
              x:Class="ArtPrompter.Views.AffixLibraryView"
              x:DataType="vm:AffixLibraryViewModel">
-    <StackPanel Spacing="16">
+    <Grid RowDefinitions="Auto,*,Auto" RowSpacing="16">
         <TextBlock Text="Prompt Attribute Library" FontSize="20" />
 
-        <TabControl>
+        <TabControl Grid.Row="1">
             <TabItem Header="Prefixes">
                 <ListBox ItemsSource="{Binding Prefixes}" MaxHeight="280"
                          ScrollViewer.VerticalScrollBarVisibility="Auto" />
@@ -23,5 +23,8 @@
                          ScrollViewer.VerticalScrollBarVisibility="Auto" />
             </TabItem>
         </TabControl>
-    </StackPanel>
+
+        <Button Grid.Row="2" Content="Back" HorizontalAlignment="Right"
+                Command="{Binding CloseCommand}" />
+    </Grid>
 </UserControl>

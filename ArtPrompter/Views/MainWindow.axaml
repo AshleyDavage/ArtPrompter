@@ -13,8 +13,8 @@
         Title="ArtPrompter"
 		TransparencyLevelHint="AcrylicBlur"
 		Background="Transparent"
-		Width="920"
-		Height="540">
+		Width="1440"
+		Height="810">
 	
     <Grid RowDefinitions="Auto,*">
         <Border Grid.Row="0">
@@ -31,7 +31,7 @@
 
         <Grid Grid.Row="1">
             <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="20" Margin="32">
-                <Border Background="{DynamicResource SurfaceBrush}" CornerRadius="12" Padding="24" Width="520">
+                <Border Background="{DynamicResource SurfaceBrush}" CornerRadius="12" Padding="24" Width="800">
                     <TextBlock Text="{Binding PromptText}" FontSize="28" TextAlignment="Center" TextWrapping="Wrap"
                                HorizontalAlignment="Center" VerticalAlignment="Center" />
                 </Border>

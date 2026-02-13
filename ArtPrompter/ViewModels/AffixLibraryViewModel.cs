@@ -1,6 +1,7 @@
 using ArtPrompter.Models;
 using ArtPrompter.Services;
 using System.Collections.ObjectModel;
+using System.Windows.Input;
 using System.Threading.Tasks;
 
 namespace ArtPrompter.ViewModels
@@ -9,9 +10,10 @@ namespace ArtPrompter.ViewModels
     {
         private readonly PromptDataService _promptDataService;
 
-        public AffixLibraryViewModel(PromptDataService promptDataService)
+        public AffixLibraryViewModel(PromptDataService promptDataService, ICommand closeCommand)
         {
             _promptDataService = promptDataService;
+            CloseCommand = closeCommand;
             _ = LoadAsync();
         }
 
@@ -20,6 +22,8 @@ namespace ArtPrompter.ViewModels
         public ObservableCollection<string> Subjects { get; } = new();
 
         public ObservableCollection<string> Suffixes { get; } = new();
+
+        public ICommand CloseCommand { get; }
 
         private async Task LoadAsync()
         {

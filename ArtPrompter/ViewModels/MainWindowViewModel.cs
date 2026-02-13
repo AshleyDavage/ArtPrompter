@@ -80,7 +80,8 @@ namespace ArtPrompter.ViewModels
         [RelayCommand]
         private void OpenAffixLibrary()
         {
-            ShowPopup(new AffixLibraryViewModel(_promptDataService));
+            var viewModel = new AffixLibraryViewModel(_promptDataService, ClosePopupCommand);
+            ShowPopup(viewModel);
         }
 
         [RelayCommand]
