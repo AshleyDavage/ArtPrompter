@@ -42,6 +42,13 @@
                 </Border>
 
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="12">
+                <ComboBox Width="220" ItemsSource="{Binding Themes}" SelectedItem="{Binding SelectedTheme}">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Name}" />
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
                 <Button Content="Generate Prompt" Command="{Binding GeneratePromptCommand}" />
             </StackPanel>
 

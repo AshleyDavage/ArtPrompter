@@ -27,7 +27,8 @@ namespace ArtPrompter
 
                 var mainWindow = new MainWindow();
                 var promptDataService = new PromptDataService();
-                mainWindow.DataContext = new MainWindowViewModel(promptDataService);
+                var themeService = new ThemeService();
+                mainWindow.DataContext = new MainWindowViewModel(promptDataService, themeService);
                 desktop.MainWindow = mainWindow;
             }
 

@@ -1,0 +1,37 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="using:ArtPrompter.ViewModels"
+             mc:Ignorable="d" d:DesignWidth="480" d:DesignHeight="240"
+             x:Class="ArtPrompter.Views.ConfirmDuplicateView"
+             x:DataType="vm:ConfirmDuplicateViewModel">
+    <StackPanel Spacing="16">
+        <TextBlock Text="Duplicate prompt detected" FontSize="20" />
+
+        <TextBlock TextWrapping="Wrap">
+            <Run Text="The " />
+            <InlineUIContainer BaselineAlignment="Center">
+                <Border BorderBrush="{DynamicResource PrimaryBrush}" BorderThickness="0,0,0,1" Padding="0,0,0,0">
+                    <TextBlock Text="{Binding AttributeType}" FontWeight="SemiBold" VerticalAlignment="Center" />
+                </Border>
+            </InlineUIContainer>
+            <Run Text=" value already exists in the " />
+            <InlineUIContainer BaselineAlignment="Center">
+                <Border BorderBrush="{DynamicResource PrimaryBrush}" BorderThickness="0,0,0,1" Padding="0,0,0,0">
+                    <TextBlock Text="{Binding ThemeName}" FontWeight="SemiBold" VerticalAlignment="Center" />
+                </Border>
+            </InlineUIContainer>
+            <Run Text=" theme." />
+        </TextBlock>
+
+        <Border Background="{DynamicResource SurfaceBrush}" CornerRadius="8" Padding="12">
+            <TextBlock Text="{Binding Value}" TextWrapping="Wrap" />
+        </Border>
+
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Spacing="12">
+            <Button Content="Cancel" Command="{Binding CancelCommand}" />
+            <Button Content="Add Anyway" Command="{Binding ConfirmCommand}" />
+        </StackPanel>
+    </StackPanel>
+</UserControl>

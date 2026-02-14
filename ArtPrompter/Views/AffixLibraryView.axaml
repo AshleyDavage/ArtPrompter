@@ -3,6 +3,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vm="using:ArtPrompter.ViewModels"
+             xmlns:models="using:ArtPrompter.Models"
              mc:Ignorable="d" d:DesignWidth="640" d:DesignHeight="520"
              x:Class="ArtPrompter.Views.AffixLibraryView"
              x:DataType="vm:AffixLibraryViewModel">
@@ -24,9 +25,9 @@
                     <ListBox CornerRadius="8" Background="{DynamicResource PromptLibraryPanelBrush}" ItemsSource="{Binding Prefixes}" MaxHeight="280" Width="500" Classes="PromptLibraryList"
                              ScrollViewer.VerticalScrollBarVisibility="Auto">
                         <ListBox.ItemTemplate>
-                            <DataTemplate x:DataType="x:String">
+                            <DataTemplate x:DataType="models:PromptItem">
                                 <Grid ColumnDefinitions="*,Auto" Margin="6,2">
-                                    <TextBlock Text="{Binding}" VerticalAlignment="Center" />
+                                    <TextBlock Text="{Binding Value}" VerticalAlignment="Center" />
                                     <Button Classes="DeleteButton" Grid.Column="1" Content="🗑"
                                             Command="{Binding $parent[UserControl].DataContext.RemovePrefixCommand}"
                                             CommandParameter="{Binding}" />
@@ -41,9 +42,9 @@
                     <ListBox CornerRadius="8" Background="{DynamicResource PromptLibraryPanelBrush}" ItemsSource="{Binding Subjects}" MaxHeight="280" Width="500" Classes="PromptLibraryList"
                              ScrollViewer.VerticalScrollBarVisibility="Auto">
                         <ListBox.ItemTemplate>
-                            <DataTemplate x:DataType="x:String">
+                            <DataTemplate x:DataType="models:PromptItem">
                                 <Grid ColumnDefinitions="*,Auto" Margin="6,2">
-                                    <TextBlock Text="{Binding}" VerticalAlignment="Center" />
+                                    <TextBlock Text="{Binding Value}" VerticalAlignment="Center" />
                                     <Button Classes="DeleteButton" Grid.Column="1" Content="🗑"
                                             Command="{Binding $parent[UserControl].DataContext.RemoveSubjectCommand}"
                                             CommandParameter="{Binding}" />
@@ -58,9 +59,9 @@
                     <ListBox CornerRadius="8" Background="{DynamicResource PromptLibraryPanelBrush}" ItemsSource="{Binding Suffixes}" MaxHeight="280" Width="500" Classes="PromptLibraryList"
                              ScrollViewer.VerticalScrollBarVisibility="Auto">
                         <ListBox.ItemTemplate>
-                            <DataTemplate x:DataType="x:String">
+                            <DataTemplate x:DataType="models:PromptItem">
                                 <Grid ColumnDefinitions="*,Auto" Margin="6,2">
-                                    <TextBlock Text="{Binding}" VerticalAlignment="Center" />
+                                    <TextBlock Text="{Binding Value}" VerticalAlignment="Center" />
                                     <Button Classes="DeleteButton" Grid.Column="1" Content="🗑"
                                             Command="{Binding $parent[UserControl].DataContext.RemoveSuffixCommand}"
                                             CommandParameter="{Binding}" />

@@ -9,7 +9,13 @@
 
   <ItemGroup>
     <AvaloniaResource Include="Assets\**" />
-   <Content Include="Data\*.json" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="Data\**\*.json" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Data\Default\prefix.json" />
+    <Content Include="Data\Default\subjects.json" />
+    <Content Include="Data\Default\suffix.json" />
   </ItemGroup>
 
   <ItemGroup>
