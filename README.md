@@ -1,6 +1,8 @@
 # ArtPrompter
 
-ArtPrompter is a desktop app that generates art prompt phrases using customizable prefixes, subjects, and suffixes.
+ArtPrompter is a desktop application that generates text-based prompts to inspire creativity or pose challengers for artists.
+
+It uses user-defined strings stored in a JSON File format to create a random prompt.
 
 ## Supported operating systems
 
