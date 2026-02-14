@@ -11,9 +11,12 @@ It uses user-defined strings stored in a JSON File format to create a random pro
 - Linux
 
 ## Installation
-
 1. Clone the repository:
    - `git clone https://github.com/AshleyDavage/ArtPrompter.git`
-2. Build and run:
-   - `dotnet build`
-   - `dotnet run --project ArtPrompter/ArtPrompter.csproj`
+2. On Windows run publish.bat
+   - Output: `ArtPrompter/bin/Release/net8.0/win-x64/publish/`
+
+### Alternative
+1. Download the latest release from the [Releases](https://github.com/AshleyDavage/ArtPrompter/releases)
+2. Extract into folder of choice
+
